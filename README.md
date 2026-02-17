@@ -8,6 +8,8 @@ Allow 443 (HTTPS)
 
 Database - PostgreSQL - Port: 5432
 
+===============================================================
+
 Step2: Create IAM User:
 
 Go to AWS Console → IAM → Users → Create User
@@ -16,6 +18,8 @@ Don't check console access
 Attach policy: AdministratorAccess (for learning - use restricted in production)
 Create access key → CLI
 Save Access Key ID and Secret Access Key
+
+===============================================================
 
 Step 3:
 Create PostgreSQL RDS
@@ -34,7 +38,9 @@ Public access → No (recommended)
 VPC → Default
 
 After creation:
-Copy the Endpoint
+Copy the Endpoint: assignment5-db.cl0u0eeayj3i.ap-south-1.rds.amazonaws.com
+
+===============================================================
 
 Step 4:
 
@@ -59,7 +65,10 @@ Username: postgres
 Password: password01
 Database: postgres
 
+===============================================================
+
 Step 5: install docker and Docker compose
+
 sudo yum update -y
 sudo yum install docker -y
 sudo systemctl start docker
@@ -72,7 +81,22 @@ sudo chmod +x /usr/local/bin/docker-compose
 docker --version
 docker-compose --version
 
+===============================================================
+
 Step 6: Open AWS ECR and created one repository: assignment5-flask-app
 URL: 783764582691.dkr.ecr.ap-south-1.amazonaws.com/assignment5-flask-app
+
+Build Docker Image
+docker build -t 879381241087.dkr.ecr.ap-south-1.amazonaws.com/nov25-class5:2.0 .
+
+===============================================================
+
+Step 7: Now need to Push the image to ECR by using AWS CLI to login to AWS
+
+Now i have logged inside AWS by using CLI
+
+Command: aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 879381241087.dkr.ecr.ap-south-1.amazonaws.com
+
+Now i need to push the image to ECR:
 
 
